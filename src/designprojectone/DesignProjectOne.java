@@ -26,59 +26,55 @@ import java.util.*;
 * Print out the individual cost for every student 
 ***************************************************/
   
-/**************** TEST CASES ************************
-*Test                     Input      Desired Output
-* Division by 0 error     0 0 0       
-* 
-* 
-* 
-* 
-*
-*
-***************************************************/
+/**************** TEST CASES *********************************************************
+*Test                     Input     Desired Output                       Actual Output
+* Division by 0 error     0 0 0     You cannot divide by 0
+* Negative Numbers       -1 0 0     You cannot input negative numbers
+*                        -1 4 5     You cannot input negative numbers
+* # of projects > 100  100 100 100  The cost per student is $62.5
+* Standard Case          10 10 10   The cost per student is $65
+* Only one type          0  0  10
+**************************************************************************************/
 public class DesignProjectOne {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
     //Write Pseudocode FIRST as comments and THEN write the code
     
-        //CONSTANTS
-        int PROJECT_COST = 50;
-        int ARDUINO_COST = 10;
-        int RPI_COST = 15;
-        int VR_COST = 20;
+        //ASSIGN CONSTANTS
+        double PROJECT_COST = 50.00;
+        double ARDUINO_COST = 10.00;
+        double RPI_COST = 15.00;
+        double VR_COST = 20.00;
         
-        // INITIALIZE SCANNER
+        //INITIALIZE SCANNER
         Scanner keyboard = new Scanner(System.in);
         
-        //VARIABLES
+        //ASK USER TO ASSIGN VARIABLE VALUES
         System.out.print("Number of students writing the Arduino Project: ");
         int numArduino = keyboard.nextInt();
         
-        System.out.print("Number of students writing the Raspberry AI Project: ");
+        System.out.print("Number of students writing the Raspberry PI Project: ");
         int numRPI = keyboard.nextInt();
         
         System.out.print("Number of students writing the VR Project: ");
         int numVR = keyboard.nextInt();
         
+        //CALCULATE VARIABLE VALUES
         int totalNumberOfStudents = numArduino + numRPI + numVR;
-        int fixedCost = totalNumberOfStudents * PROJECT_COST;
-        int variableCost = numArduino * ARDUINO_COST + numRPI * RPI_COST + numVR * VR_COST;
+        double fixedCost = totalNumberOfStudents * PROJECT_COST;
+        double variableCost = numArduino * ARDUINO_COST + numRPI * RPI_COST + numVR * VR_COST;
         
-        //CODE
-        if (totalNumberOfStudents > 0) {
+        // CHECK IF THE INPUTS ARE VALID, IF THEY ARE PROCEED WITH THE CALCULATIONS
+        if ((numArduino < 0) || (numRPI < 0) || (numVR < 0)) {
+            System.out.println("You cannot input negative numbers!");
+        }
+        else if ((numArduino + numRPI + numVR) == 0) {
+            System.out.println("You cannot have 0 students doing each porject!");
+        }
+        else {
             if (totalNumberOfStudents > 100) {
                 fixedCost *= 0.95;
             }
-            
-        }
-        else {
-            System.out.println("Invalid Input");
-        }
-        
-       
+            System.out.println("The cost per student is $" + (fixedCost + variableCost)/totalNumberOfStudents);
+        }  
     }
-    
 }
