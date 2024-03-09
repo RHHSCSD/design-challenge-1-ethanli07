@@ -5,6 +5,7 @@
 
 package designprojectone;
 import java.util.*;
+import java.text.*;
 
 /***************************************************
 *  Program: Tech Fair Project Calculator
@@ -20,7 +21,7 @@ import java.util.*;
 * Number of students writing the VR Project
 *PROCESSING:
 * Takes the total number of students doing each project and calculates the total fixed cost, applying a discount if appropriate
-* Take the number of students doing each respective contest and add their respective costs to the total cost
+* Take the number of students doing each respective contest and add their respective costs to the total cost, applying discounts where appropriate
 * Divide the total cost among the total number of students to calculate the individual cost for every student
 *OUTPUT:
 * Print out the individual cost for every student 
@@ -28,11 +29,11 @@ import java.util.*;
   
 /**************** TEST CASES *********************************************************
 *Test                     Input     Desired Output                       Actual Output
-* Division by 0 error     0 0 0     You cannot divide by 0
-* Negative Numbers       -1 0 0     You cannot input negative numbers
-*                        -1 4 5     You cannot input negative numbers
-* # of projects > 100  100 100 100  The cost per student is $62.5
-* Standard Case          10 10 10   The cost per student is $65
+* Division by 0 error     0 0 0     You cannot divide by 0!              You cannot divide by 0
+* Negative Numbers       -1 0 0     You cannot input negative numbers!   You cannot input negative numbers!
+*                        -1 4 5     You cannot input negative numbers!   You cannot input negative numbers!
+* # of projects > 100  100 100 100  The cost per student is $61.42       The cost per student is $61.416666666666664
+* Test Discounts         30 30 30   The cost per student is $64.5        The cost per student is $64.5
 * Only one type          0  0  10
 **************************************************************************************/
 public class DesignProjectOne {
@@ -45,8 +46,9 @@ public class DesignProjectOne {
         double RPI_COST = 15.00;
         double VR_COST = 20.00;
         
-        //INITIALIZE SCANNER
+        //INITIALIZE OBJECTS
         Scanner keyboard = new Scanner(System.in);
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         
         //ASK USER TO ASSIGN VARIABLE VALUES
         System.out.print("Number of students writing the Arduino Project: ");
@@ -63,7 +65,18 @@ public class DesignProjectOne {
         double fixedCost = totalNumberOfStudents * PROJECT_COST;
         double variableCost = numArduino * ARDUINO_COST + numRPI * RPI_COST + numVR * VR_COST;
         
-        // CHECK IF THE INPUTS ARE VALID, IF THEY ARE PROCEED WITH THE CALCULATIONS
+        //ADJUST FOR PRICE DISCOUNTS
+        if (totalNumberOfStudents > 100) {
+            fixedCost *= 0.95;
+        }
+        if (numArduino > 15) {
+            variableCost -= (numArduino - 15);
+        }
+        if (numRPI > 20) {
+            variableCost -= (numRPI - 20) * 3;
+        }
+        
+        // CHECK IF THE INPUTS ARE VALID, IF THEY ARE OUTPUT THE COST PER STUDENT
         if ((numArduino < 0) || (numRPI < 0) || (numVR < 0)) {
             System.out.println("You cannot input negative numbers!");
         }
@@ -71,10 +84,7 @@ public class DesignProjectOne {
             System.out.println("You cannot have 0 students doing each porject!");
         }
         else {
-            if (totalNumberOfStudents > 100) {
-                fixedCost *= 0.95;
-            }
-            System.out.println("The cost per student is $" + (fixedCost + variableCost)/totalNumberOfStudents);
+            System.out.println("The cost per student is $" + decimalFormat.format((fixedCost + variableCost)/totalNumberOfStudents));
         }  
     }
 }
