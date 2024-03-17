@@ -19,15 +19,25 @@ import java.text.*;
 * Number of students writing the Arduino Project
 * Number of students writing the Raspberry PI Project
 * Number of students writing the VR Project
+
 *PROCESSING:
-* Takes the total number of students doing each project and calculates the total fixed cost, applying a discount if appropriate
+* Take the total number of students doing each project and calculates the total fixed cost, applying a discount if appropriate 
+* fixedCost = PROJECT_COST * totalNumberOfStudents
+* fixedCost *= 0.95 (if appropriate)
+* 
 * Take the number of students doing each respective contest and add their respective costs to the total cost, applying discounts where appropriate
+* variableCost = numArduino * ARDUINO_COST + numRPI * RPI_COST + numVR * VR_COST
+* variableCost -= numArduino - 15 (if applicable)
+* variableCost -= (numRPI - 20) * 3 (if applicable)
+* 
 * Divide the total cost among the total number of students to calculate the individual cost for every student
+* individualCost = (fixedCost + variableCost)/totalNumberOfStudents
+
 *OUTPUT:
 * Print out the individual cost for every student 
 ***************************************************/
   
-/**************** TEST CASES *********************************************************
+/**************** TEST CASES ************************************************************************************************
 *Test                     Input     Desired Output                            Actual Output
 * Division by 0 error     0 0 0     You cannot 0 students doing each project! You cannot have 0 students doing each porject!
 * Negative Numbers       -1 0 0     You cannot input negative numbers!        You cannot input negative numbers!
@@ -35,7 +45,8 @@ import java.text.*;
 * # of projects > 100  100 100 100  The cost per student is $61.42            The cost per student is $61.416666666666664
 * Test Discounts         30 30 30   The cost per student is $64.5             The cost per student is $64.5
 * Only one type          0  0  10   The cost per student is $70               The cost per student is $70
-**************************************************************************************/
+*****************************************************************************************************************************/
+
 public class DesignProjectOne {
     public static void main(String[] args) {
     //Write Pseudocode FIRST as comments and THEN write the code
@@ -76,7 +87,10 @@ public class DesignProjectOne {
             variableCost -= (numRPI - 20) * 3;
         }
         
-        // CHECK IF THE INPUTS ARE VALID, IF THEY ARE OUTPUT THE COST PER STUDENT
+        //CALCULATE INDIVIDUAL COST
+        double individualCost = (fixedCost + variableCost)/totalNumberOfStudents;
+        
+        //CHECK IF THE INPUTS ARE VALID, IF THEY ARE OUTPUT THE COST PER STUDENT
         if ((numArduino < 0) || (numRPI < 0) || (numVR < 0)) {
             System.out.println("You cannot input negative numbers!");
         }
@@ -84,7 +98,7 @@ public class DesignProjectOne {
             System.out.println("You cannot have 0 students doing each project!");
         }
         else {
-            System.out.println("The cost per student is $" + decimalFormat.format((fixedCost + variableCost)/totalNumberOfStudents));
+            System.out.println("The cost per student is $" + decimalFormat.format(individualCost));
         }  
     }
 }
