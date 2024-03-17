@@ -10,7 +10,7 @@ import java.text.*;
 /***************************************************
 *  Program: Tech Fair Project Calculator
 *  Author: Ethan Li
-*  Date: March 7, 2024
+*  Date: March 17, 2024
 *  Description: Takes the inputs of the number of students doing each project, calculates the total cost, and splits it evenly among all participating students
 ****************************************************/
 
