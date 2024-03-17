@@ -28,29 +28,29 @@ import java.text.*;
 ***************************************************/
   
 /**************** TEST CASES *********************************************************
-*Test                     Input     Desired Output                       Actual Output
-* Division by 0 error     0 0 0     You cannot divide by 0!              You cannot divide by 0
-* Negative Numbers       -1 0 0     You cannot input negative numbers!   You cannot input negative numbers!
-*                        -1 4 5     You cannot input negative numbers!   You cannot input negative numbers!
-* # of projects > 100  100 100 100  The cost per student is $61.42       The cost per student is $61.416666666666664
-* Test Discounts         30 30 30   The cost per student is $64.5        The cost per student is $64.5
-* Only one type          0  0  10
+*Test                     Input     Desired Output                            Actual Output
+* Division by 0 error     0 0 0     You cannot 0 students doing each project! You cannot have 0 students doing each porject!
+* Negative Numbers       -1 0 0     You cannot input negative numbers!        You cannot input negative numbers!
+*                        -1 4 5     You cannot input negative numbers!        You cannot input negative numbers!
+* # of projects > 100  100 100 100  The cost per student is $61.42            The cost per student is $61.416666666666664
+* Test Discounts         30 30 30   The cost per student is $64.5             The cost per student is $64.5
+* Only one type          0  0  10   The cost per student is $70               The cost per student is $70
 **************************************************************************************/
 public class DesignProjectOne {
     public static void main(String[] args) {
     //Write Pseudocode FIRST as comments and THEN write the code
     
         //ASSIGN CONSTANTS
-        double PROJECT_COST = 50.00;
-        double ARDUINO_COST = 10.00;
-        double RPI_COST = 15.00;
-        double VR_COST = 20.00;
+        final double PROJECT_COST = 50.00;
+        final double ARDUINO_COST = 10.00;
+        final double RPI_COST = 15.00;
+        final double VR_COST = 20.00;
         
         //INITIALIZE OBJECTS
         Scanner keyboard = new Scanner(System.in);
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         
-        //ASK USER TO ASSIGN VARIABLE VALUES
+        //ASK USER NUM OF STUDENTS WRITING EACH PROJECT
         System.out.print("Number of students writing the Arduino Project: ");
         int numArduino = keyboard.nextInt();
         
@@ -60,7 +60,7 @@ public class DesignProjectOne {
         System.out.print("Number of students writing the VR Project: ");
         int numVR = keyboard.nextInt();
         
-        //CALCULATE VARIABLE VALUES
+        //CALCULATE COSTS
         int totalNumberOfStudents = numArduino + numRPI + numVR;
         double fixedCost = totalNumberOfStudents * PROJECT_COST;
         double variableCost = numArduino * ARDUINO_COST + numRPI * RPI_COST + numVR * VR_COST;
@@ -81,7 +81,7 @@ public class DesignProjectOne {
             System.out.println("You cannot input negative numbers!");
         }
         else if ((numArduino + numRPI + numVR) == 0) {
-            System.out.println("You cannot have 0 students doing each porject!");
+            System.out.println("You cannot have 0 students doing each project!");
         }
         else {
             System.out.println("The cost per student is $" + decimalFormat.format((fixedCost + variableCost)/totalNumberOfStudents));
