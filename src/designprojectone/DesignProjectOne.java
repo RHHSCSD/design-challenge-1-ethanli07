@@ -51,13 +51,13 @@ public class DesignProjectOne {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         
         //ASK USER NUM OF STUDENTS WRITING EACH PROJECT
-        System.out.print("Number of students writing the Arduino Project: ");
+        System.out.print("Number of students doing the Arduino Project: ");
         int numArduino = keyboard.nextInt();
         
-        System.out.print("Number of students writing the Raspberry PI Project: ");
+        System.out.print("Number of students doing the Raspberry PI Project: ");
         int numRPI = keyboard.nextInt();
         
-        System.out.print("Number of students writing the VR Project: ");
+        System.out.print("Number of students doing the VR Project: ");
         int numVR = keyboard.nextInt();
         
         //CALCULATE COSTS
